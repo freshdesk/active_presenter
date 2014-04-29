@@ -164,7 +164,7 @@ module ActivePresenter
       saved = false
       ActiveRecord::Base.transaction do
         if valid?
-          run_callbacks :validation do
+          run_callbacks :save do
             saved = presented.keys.select {|key| save?(key, send(key))}.all? {|key| send(key).save}
             raise ActiveRecord::Rollback unless saved
           end
